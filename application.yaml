@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1apha1
+kind: Application
+metadata:
+  name: samriddhidjango
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/EN18CS301225/samriddhidjango.git
+    targetRevision: HEAD
+    path: app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: samriddhidjango
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
